@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospice Volunteer Training Program</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-heart"></i>
+                    <h3>Hospice Training</h3>
+                </div>
+                <button class="close-btn" id="closeSidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="nav-section">
+                <h4>Training Dashboard</h4>
+                <ul class="nav-menu">
+                    <li><a href="#" data-view="login" class="nav-link" id="loginLink">
+                        <i class="fas fa-user"></i> Login
+                    </a></li>
+                    <li><a href="#" data-view="dashboard" class="nav-link active hidden" id="dashboardLink">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section hidden" id="trainingSection">
+                <h4>Training Modules</h4>
+                <ul class="nav-menu" id="modulesList">
+                    <!-- Modules will be populated by JavaScript -->
+                </ul>
+            </div>
+
+            <div class="nav-section hidden" id="assessmentSection">
+                <h4>Assessment</h4>
+                <ul class="nav-menu">
+                    <li><a href="#" data-view="final-assessment" class="nav-link">
+                        <i class="fas fa-clipboard-check"></i> Final Assessment
+                    </a></li>
+                    <li><a href="#" data-view="certificate" class="nav-link">
+                        <i class="fas fa-certificate"></i> Certificate
+                    </a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="header">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-title">
+                    <h1 id="pageTitle">Hospice Volunteer Training Program</h1>
+                </div>
+                <div class="progress-indicator hidden" id="progressIndicator">
+                    <span id="overallProgress">0% Complete</span>
+                </div>
+            </header>
+
+            <main class="content" id="mainContent">
+                <!-- Login View -->
+                <div id="login" class="view active">
+                    <div class="login-container">
+                        <div class="login-card card">
+                            <div class="card__body">
+                                <h2>Welcome to Hospice Volunteer Training</h2>
+                                <p>Please enter your information to begin the training program.</p>
+                                
+                                <form id="loginForm" class="login-form">
+                                    <div class="form-group">
+                                        <label for="fullName" class="form-label">Full Name</label>
+                                        <input type="text" id="fullName" class="form-control" required 
+                                               placeholder="Enter your full name">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" id="email" class="form-control" required 
+                                               placeholder="Enter your email address">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="organization" class="form-label">Organization (Optional)</label>
+                                        <input type="text" id="organization" class="form-control" 
+                                               placeholder="Enter your organization name">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="startDate" class="form-label">Training Start Date</label>
+                                        <input type="date" id="startDate" class="form-control" required>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn--primary btn--full-width">
+                                        Begin Training
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard View -->
+                <div id="dashboard" class="view active">
+                    <div class="welcome-section">
+                        <div class="welcome-card card">
+                            <div class="card__body">
+                                <h2>Welcome to Hospice Volunteer Training</h2>
+                                <p>This comprehensive training program will prepare you to provide compassionate, effective support to hospice patients and their families while ensuring compliance with all regulatory requirements.</p>
+                                
+                                <div class="training-stats">
+                                    <div class="stat-item">
+                                        <i class="fas fa-book"></i>
+                                        <div>
+                                            <h3 id="totalModules">11</h3>
+                                            <span>Training Modules</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-clock"></i>
+                                        <div>
+                                            <h3 id="totalTime">6.5</h3>
+                                            <span>Hours Total</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <div>
+                                            <h3 id="completedModules">0</h3>
+                                            <span>Completed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modules-grid" id="modulesGrid">
+                        <!-- Module cards will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Module View -->
+                <div id="module" class="view">
+                    <div class="module-header">
+                        <div class="module-nav">
+                            <button class="btn btn--secondary" id="prevModule">
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </button>
+                            <span class="module-progress" id="moduleProgress">Module 1 of 11</span>
+                            <button class="btn btn--secondary" id="nextModule">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="module-content">
+                        <div class="module-info card">
+                            <div class="card__body">
+                                <h2 id="moduleTitle">Module Title</h2>
+                                <div class="module-meta">
+                                    <span class="duration" id="moduleDuration"><i class="fas fa-clock"></i> 30 minutes</span>
+                                </div>
+                                
+                                <div class="learning-objectives">
+                                    <h3>Learning Objectives</h3>
+                                    <ul id="moduleObjectives">
+                                        <!-- Objectives populated by JavaScript -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="module-body card">
+                            <div class="card__body">
+                                <div id="moduleContentBody">
+                                    <!-- Module content populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="module-quiz card" id="moduleQuiz">
+                            <div class="card__body">
+                                <h3>Knowledge Check</h3>
+                                <div id="quizContent">
+                                    <!-- Quiz content populated by JavaScript -->
+                                </div>
+                                <div class="quiz-actions">
+                                    <button class="btn btn--primary" id="submitQuiz">Submit Answer</button>
+                                    <button class="btn btn--primary hidden" id="completeModule">Complete Module</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Assessment View -->
+                <div id="final-assessment" class="view">
+                    <div class="assessment-header card">
+                        <div class="card__body">
+                            <h2>Final Assessment</h2>
+                            <p>Complete this assessment to demonstrate your understanding of hospice volunteer training requirements. You must score 80% or higher to pass.</p>
+                        </div>
+                    </div>
+
+                    <div class="assessment-content card">
+                        <div class="card__body">
+                            <div id="assessmentQuestions">
+                                <!-- Final assessment questions populated by JavaScript -->
+                            </div>
+                            <div class="assessment-actions">
+                                <button class="btn btn--primary" id="submitAssessment">Submit Assessment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate View -->
+                <div id="certificate" class="view">
+                    <div class="certificate-container">
+                        <div class="certificate">
+                            <div class="certificate-header">
+                                <i class="fas fa-certificate certificate-icon"></i>
+                                <h2>Certificate of Completion</h2>
+                            </div>
+                            <div class="certificate-body">
+                                <h3>Hospice Volunteer Training Program</h3>
+                                <p>This certifies that</p>
+                                <h4 class="recipient-name" id="certificateName">Volunteer</h4>
+                                <p>has successfully completed the comprehensive Hospice Volunteer Training Program, demonstrating competency in all required areas of hospice care and volunteer responsibilities.</p>
+                                <div class="certificate-details">
+                                    <div class="detail-item">
+                                        <strong>Completion Date:</strong> <span id="completionDate"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <strong>Total Training Hours:</strong> 6.5 hours
+                                    </div>
+                                    <div class="detail-item">
+                                        <strong>Assessment Score:</strong> <span id="finalScore"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="certificate-footer">
+                                <div class="signature-line">
+                                    <div class="signature">Training Coordinator</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="btn btn--primary" id="printCertificate">
+                                <i class="fas fa-print"></i> Print Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal for quiz results -->
+    <div class="modal" id="resultModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="resultTitle">Quiz Result</h3>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="resultContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--primary" id="modalOk">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
